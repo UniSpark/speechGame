@@ -191,6 +191,9 @@ namespace IBM.Watson.DeveloperCloud.Widgets
 		[SerializeField]
 		public Text outputText;
 
+		[SerializeField]
+		public SpeechManager speechManager;
+
     private void OnRecognize(SpeechRecognitionEvent result)
     {
       m_ResultOutput.SendData(new SpeechToTextData(result));
@@ -206,6 +209,8 @@ namespace IBM.Watson.DeveloperCloud.Widgets
           {
             string text = alt.transcript;
 						outputText.text = text;
+
+						speechManager.addSpokenWord (text);
             if (m_Transcript != null)
               m_Transcript.text += string.Format("{0} ({1}, {2:0.00})\n",
                   text, res.final ? "Final" : "Interim", alt.confidence);

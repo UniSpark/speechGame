@@ -13,8 +13,10 @@ public class SpeechManager : MonoBehaviour {
 	private LinkedList<string> spokenWords;
 	private LinkedList<string> listenWords;
 
+	//TODO add timer to clear spokenwords after a few seconds. 
+
 	// List of listen words grouped into pharess or possible commands, per scene or dialogue menu event.
-	private List<SpeechValueObject> commands;
+	private List<ArrayList> commands;
 
 	// Use this for initialization
 	void Start () {
@@ -42,7 +44,15 @@ public class SpeechManager : MonoBehaviour {
 	}
 
 	public void addSpokenWord(string word) {
-		spokenWords.AddLast (word);
+		ArrayList tempWords = word.Split (" ");
+		if (tempWords.Count > 1) {
+			foreach (string str in tempWords) {
+				spokenWords.AddLast (word);
+			}
+		} else {
+			spokenWords.AddLast (word);
+
+		}
 	}
 
 	// Up for refactor, depnding on data structure final choice
@@ -60,7 +70,9 @@ public class SpeechManager : MonoBehaviour {
 	}
 
 	private void matchFound(string word) {
-		
+		foreach(ArrayList command in commands){
+
+		}
 	}
 
 
