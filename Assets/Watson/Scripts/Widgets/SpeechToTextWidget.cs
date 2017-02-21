@@ -188,6 +188,9 @@ namespace IBM.Watson.DeveloperCloud.Widgets
       }
     }
 
+		[SerializeField]
+		public Text outputText;
+
     private void OnRecognize(SpeechRecognitionEvent result)
     {
       m_ResultOutput.SendData(new SpeechToTextData(result));
@@ -202,7 +205,7 @@ namespace IBM.Watson.DeveloperCloud.Widgets
           foreach (var alt in res.alternatives)
           {
             string text = alt.transcript;
-
+						outputText.text = text;
             if (m_Transcript != null)
               m_Transcript.text += string.Format("{0} ({1}, {2:0.00})\n",
                   text, res.final ? "Final" : "Interim", alt.confidence);

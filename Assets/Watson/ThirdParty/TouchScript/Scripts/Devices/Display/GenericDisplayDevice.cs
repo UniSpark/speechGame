@@ -130,6 +130,9 @@ namespace TouchScript.Devices.Display
                     case RuntimePlatform.WSAPlayerX86:
                         dpi = 160;
                         break;
+                    case RuntimePlatform.WP8Player:
+                        dpi = 160;
+                        break;
                 }
             }
         }
