@@ -18,7 +18,7 @@ public class SpeechManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		commands = new List<ArrayList> ();
+		commands = new List<SpeechValueObject> ();
 	}
 	
 	// Update is called once per frame
@@ -31,10 +31,10 @@ public class SpeechManager : MonoBehaviour {
 		listenWords.AddLast (word);
 	}
 
-	public void addCommand(ArrayList command) {
+	public void addCommand(SpeechValueObject command) {
 		commands.Add (command);
 		//First element is string of words or word to listen for
-		ArrayList newWords = command[0].split (" ");
+		string[] newWords = command.listenWords;
 		foreach(string word in newWords){
 			listenWords.AddLast (word);
 		}

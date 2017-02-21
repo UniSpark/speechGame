@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class SpeechValueObject {
 
-	string listenWords;
-	string action;
+	public string[] listenWords;
+	public string action;
 }
