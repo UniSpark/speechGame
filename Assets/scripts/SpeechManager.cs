@@ -10,8 +10,8 @@ public class SpeechManager : MonoBehaviour {
 	 * and they aren't always right, we want to simply run a circular iteration on the entire list of spoken words
 	 * against the entire list of words that the each scene is listening for during each frame.  
 	 * */
-	private LinkedList<string> spokenWords;
-	private LinkedList<string> listenWords;
+	private List<string> spokenWords;
+	private List<string> listenWords;
 
 	//TODO add timer to clear spokenwords after a few seconds. 
 
@@ -20,7 +20,7 @@ public class SpeechManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		commands = new List<SpeechValueObject> ();
+		commands = new List<ArrayList> ();
 	}
 	
 	// Update is called once per frame
@@ -30,27 +30,27 @@ public class SpeechManager : MonoBehaviour {
 	}
 
 	private void addListenWord(string word) {
-		listenWords.AddLast (word);
+		listenWords.Add (word);
 	}
 
-	public void addCommand(SpeechValueObject command) {
+	public void addCommand(ArrayList command) {
 		commands.Add (command);
 		//First element is string of words or word to listen for
-		string[] newWords = command.listenWords;
-		foreach(string word in newWords){
-			listenWords.AddLast (word);
-		}
+		ArrayList newWords = command[0].split(" ");
 
+		foreach(string word in newWords){
+			listenWords.Add (word);
+		}
 	}
 
 	public void addSpokenWord(string word) {
 		ArrayList tempWords = word.Split (" ");
 		if (tempWords.Count > 1) {
 			foreach (string str in tempWords) {
-				spokenWords.AddLast (word);
+				spokenWords.Add (word);
 			}
 		} else {
-			spokenWords.AddLast (word);
+			spokenWords.Add (word);
 
 		}
 	}
