@@ -34,16 +34,21 @@ public class SpeechManager : MonoBehaviour {
 	}
 
 	public void addCommand(ArrayList command) {
+		// As words match, they get added to this array.  When it matches the length of the original - the command gets called.
+		ArrayList buildList = new ArrayList();
+		// Adding it to the 3rd element in each command array
+		command [2] = buildList;
+		// Add command to the list
 		commands.Add (command);
 		//First element is string of words or word to listen for
-		ArrayList newWords = command[0].split(" ");
-
+		ArrayList newWords = command[0].ToString().Split(" ");
 		foreach(string word in newWords){
 			listenWords.Add (word);
 		}
 	}
 
 	public void addSpokenWord(string word) {
+		// Create an array of words to be able to listen to each one 
 		ArrayList tempWords = word.Split (" ");
 		if (tempWords.Count > 1) {
 			foreach (string str in tempWords) {
@@ -51,7 +56,6 @@ public class SpeechManager : MonoBehaviour {
 			}
 		} else {
 			spokenWords.Add (word);
-
 		}
 	}
 
@@ -60,7 +64,7 @@ public class SpeechManager : MonoBehaviour {
 		foreach (string lWord in listenWords)
 		{
 			foreach (string sWord in spokenWords){
-				if (lWord == sWord) {
+				if (lWord.ToLower() == sWord.ToLower()) {
 					matchFound (sWord);
 					listenWords.Remove (lWord);
 					spokenWords.Remove (sWord);
@@ -71,9 +75,12 @@ public class SpeechManager : MonoBehaviour {
 
 	private void matchFound(string word) {
 		foreach(ArrayList command in commands){
-
+			ArrayList wordArray = command[0].ToString().Split(" ");
+			foreach(string newWord in wordArray){
+				if(newWord.ToLower() == word){
+					//command[2]
+				}
+			}
 		}
 	}
-
-
 }
